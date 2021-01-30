@@ -31,6 +31,7 @@ namespace ZadnjiPotresi.Controllers
         CancellationTokenSource cancellationToken = new CancellationTokenSource();
         HttpClient httpClient = new HttpClient();
 
+        //first step is to scrape website by given url through httpClient
         internal async void ScrapeWebsite()
         {
             CancellationTokenSource cancellationToken = new CancellationTokenSource();
