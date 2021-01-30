@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var allEarthQuakes = (List<string>)ViewData["Potresi"];
+    var allInfos = (List<string>)ViewData["Info"];
+}
+
+<div style="font-family: Garamond;">
+    <div class="jumbotron jumbotron-fluid" style="border-radius: 15px;">
+        <div class="container" style="text-align: center;">
+            <h5 class="display-5">
+                Dobrodošli na našu stranicu. Preko podataka europskog seizmološkog centra i stranice VolcanoDiscovery donosimo zadnje podatke o potresima
+                koji su se dogodili na teritoriju lijepe naše.
+            </h5>
+            <br />
+            <hr />
+            <br />
+            <p class="lead">
+                @allInfos[0]
+            </p>
+        </div>
+    </div>
+
+    <div class="btn-group shadow-lg" style="border-radius: 15px;">
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveSix" asp-action="Index">Potresi iznad 6 magnitude</a>
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveFive" asp-action="Index">Potresi iznad 5 magnitude</a>
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveFour" asp-action="Index">Potresi iznad 4 magnitude</a>
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveThree" asp-action="Index">Potresi iznad 3 magnitude</a>
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveTwo" asp-action="Index">Potresi iznad 2 magnitude</a>
+        <a class="btn btn-primary" aria-current="page" asp-controller="AboveOne" asp-action="Index">Potresi iznad 1 magnitude</a>
+    </div>
+    <br />
+    <hr />
+    <div class="mx-auto" style="text-align: center; width: 650px;">
+        <h4>Zadnji današnji potresi u Hrvatskoj</h4>
+        <hr />
+        @foreach (var earthquake in allEarthQuakes)
+        {
+            if (earthquake.StartsWith("Zadnji") && earthquake.Contains("6"))
+            {
+                <hr />
+                <h4 style="color: red;">@earthquake</h4>
+            }
+            else if (earthquake.StartsWith("Vrijeme"))
+            {
+                <h6 style="color: greenyellow;">Parametri: @earthquake</h6>
+                <hr />
+            }
+            else if (earthquake.StartsWith("Zadnji") && earthquake.Contains("5"))
+            {
+                <hr />
+                <h4 style="color: darkorange;">@earthquake</h4>
+            }
+            else if (earthquake.StartsWith("Zadnji") && earthquake.Contains("4"))
+            {
+                <hr />
+                <h4 style="color: orange;">@earthquake</h4>
+            }
+            else if (earthquake.StartsWith("Zadnji") && earthquake.Contains("3"))
+            {
+                <hr />
+                <h4 style="color: yellow;">@earthquake</h4>
+            }
+            else
+            {
+                <h6 style="color:grey;">@earthquake</h6>
+            }
+        }
+        <hr />
+        <br />
+        <h6 style="text-align: center;">Glavni izvori za ovu stranicu su: VolcanoDiscovery i EMSC.</h6>
+        <br />
+        <a class="btn btn-block btn-lg btn-primary" asp-area="" asp-controller="Home" asp-action="Doniraj">Doniraj za rad servera<span class="glyphicon glyphicon-heart"></span></a>
+    </div>
+</div>
